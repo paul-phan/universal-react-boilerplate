@@ -1,0 +1,28 @@
+# IntelliJ Files
+*.iml
+*.ipr
+*.iws
+/out/
+.idea/
+.idea_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+
+.env
+build
+node_modules
+.npm
+.nyc_output
+yarn-error.log
+yarn.lock
+package-lock.json
+server.js
