@@ -19,8 +19,10 @@ const plugins = [
 				ENV: JSON.stringify(NODE_ENV),
 				NODE_ENV: JSON.stringify(NODE_ENV),
 				BABEL_ENV: JSON.stringify(NODE_ENV),
-				PUBLIC_PATH: JSON.stringify(PUBLIC_PATH)
+				PUBLIC_PATH: JSON.stringify(PUBLIC_PATH),
+				__isBrowser__: JSON.stringify('true')
 			}
+
 		})
 	],
 	...(isDev ? [new webpack.HotModuleReplacementPlugin()] : [])
@@ -41,7 +43,7 @@ module.exports = [
 		entry: {
 			main: [
 				...extraEntryFiles,
-				path.resolve(__dirname, '../client/index.js')
+				path.resolve(__dirname, './src/client.js')
 			]
 		},
 		output: {

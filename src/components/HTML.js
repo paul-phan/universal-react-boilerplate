@@ -6,7 +6,8 @@ export default function HTML({
 	scripts,
 	styles,
 	children,
-	configs
+	configs,
+	styleTags
 }) {
 	return (
 		<html className="no-js" lang="en">
@@ -20,12 +21,12 @@ export default function HTML({
 					content="width=device-width, initial-scale=1"
 				/>
 				{/*{scripts.map(script => (*/}
-					{/*<link*/}
-						{/*key={script}*/}
-						{/*rel="preload"*/}
-						{/*href={script}*/}
-						{/*as="script"*/}
-					{/*/>*/}
+				{/*<link*/}
+				{/*key={script}*/}
+				{/*rel="preload"*/}
+				{/*href={script}*/}
+				{/*as="script"*/}
+				{/*/>*/}
 				{/*))}*/}
 				{styles.map(style => (
 					<style
@@ -34,12 +35,15 @@ export default function HTML({
 						dangerouslySetInnerHTML={{ __html: style.cssText }}
 					/>
 				))}
+				{styleTags}
 			</head>
 			<body>
 				<div id="root" dangerouslySetInnerHTML={{ __html: children }} />
 				<script
 					dangerouslySetInnerHTML={{
-						__html: `window.configs=${JSON.stringify(configs)}`
+						__html: `window.__INITIAL_DATA__=${JSON.stringify(
+							configs
+						)}`
 					}}
 				/>
 				{scripts.map(script => <script key={script} src={script} />)}

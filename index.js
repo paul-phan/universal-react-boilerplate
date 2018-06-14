@@ -1,4 +1,8 @@
-require('@babel/register')
+global.__DEV__ = process.env.NODE_ENV !== 'production'
+
+if (!__DEV__) {
+	require('@babel/register')
+}
 
 import express from 'express'
 import dotenv from 'dotenv'
@@ -9,7 +13,7 @@ dotenv.load({
 	path: '.env'
 })
 const { NODE_ENV, PUBLIC_PATH, PORT } = process.env
-global.__DEV__ = NODE_ENV !== 'production'
+
 const app = express()
 
 app.set('env', NODE_ENV)
@@ -18,7 +22,7 @@ app.set('trust proxy', true)
 
 if (NODE_ENV === 'development') {
 	const webpack = require('webpack')
-	const config = require('./configs/webpack.config')
+	const config = require('./webpack.config')
 	const webpackMiddleware = require('webpack-dev-middleware')
 	const webpackHotMiddleware = require('webpack-hot-middleware')
 	const compiler = webpack(config)
@@ -44,7 +48,7 @@ if (NODE_ENV === 'development') {
 	)
 }
 
-const server = __DEV__ ? require('./server/app') : require('./build/app')
+const server = __DEV__ ? require('./src/server.js') : require('./build/app')
 app.use(server)
 
 app.listen(app.get('port'), () => {

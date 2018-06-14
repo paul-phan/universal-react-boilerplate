@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "cross-env BABEL_ENV=node NODE_ENV=production node server.js",
-    "dev": "cross-env NODE_ENV=development BABEL_ENV=node nodemon ./index.js --exec babel-node --ignore ./client",
+    "dev": "cross-env NODE_ENV=development BABEL_ENV=node nodemon ./index.js --exec babel-node --config ./nodemon.json",
     "build:client": "cross-env NODE_ENV=production BABEL_ENV=react-production webpack -p --config ./configs/webpack.config.js",
     "build:server": "cross-env NODE_ENV=production BABEL_ENV=node babel server -d build",
     "build:index": "cross-env NODE_ENV=production BABEL_ENV=node babel index.js -o server.js",
@@ -18,9 +18,12 @@
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "isomorphic-fetch": "^2.2.1",
     "mongoose": "^5.1.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.3.2",
     "unstated-x": "^0.0.2"
   },
   "devDependencies": {

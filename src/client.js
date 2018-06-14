@@ -1,13 +1,16 @@
 __webpack_public_path__ = '/assets/'
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider, Subscribe } from 'unstated-x'
-
+import { hydrate } from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/App'
 
+hydrate(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+	document.getElementById('root')
+)
 
-console.log(11111)
-ReactDOM.hydrate(<App />, window.root)
 if (module.hot) {
 	module.hot.accept()
 	// module.hot.dispose(() => {
