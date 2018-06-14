@@ -11,7 +11,7 @@ const isDev = NODE_ENV !== 'production'
 
 const outputPath = isDev
 	? path.resolve(__dirname, '.' + PUBLIC_PATH)
-	: path.resolve(__dirname, '../build' + PUBLIC_PATH)
+	: path.resolve(__dirname, './build' + PUBLIC_PATH)
 const plugins = [
 	...[
 		new webpack.DefinePlugin({

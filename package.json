@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env BABEL_ENV=node NODE_ENV=production node server.js",
     "dev": "cross-env NODE_ENV=development BABEL_ENV=node nodemon ./index.js --exec babel-node --config ./nodemon.json",
-    "build:client": "cross-env NODE_ENV=production BABEL_ENV=react-production webpack -p --config ./configs/webpack.config.js",
+    "build:client": "cross-env NODE_ENV=production BABEL_ENV=react-production webpack -p --config ./webpack.config.js",
     "build:server": "cross-env NODE_ENV=production BABEL_ENV=node babel server -d build",
     "build:index": "cross-env NODE_ENV=production BABEL_ENV=node babel index.js -o server.js",
     "serve": "yarn build:client && yarn build:index && yarn build:server && yarn start"
