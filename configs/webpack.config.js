@@ -1,6 +1,6 @@
-import path from 'path'
-import webpack from 'webpack'
-import dotenv from 'dotenv'
+const path = require('path')
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 
 dotenv.load({
 	path: '.env'
@@ -11,7 +11,7 @@ const isDev = NODE_ENV !== 'production'
 
 const outputPath = isDev
 	? path.resolve(__dirname, '.' + PUBLIC_PATH)
-	: path.resolve(__dirname, './build' + PUBLIC_PATH)
+	: path.resolve(__dirname, '../build' + PUBLIC_PATH)
 const plugins = [
 	...[
 		new webpack.DefinePlugin({
@@ -46,8 +46,10 @@ module.exports = [
 		},
 		output: {
 			filename: 'app.js',
-			path: outputPath
+			path: outputPath,
+			chunkFilename: 'chunks/[name].js'
 		},
+		plugins,
 		module: {
 			rules: [
 				{

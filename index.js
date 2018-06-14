@@ -1,3 +1,5 @@
+require('@babel/register')
+
 import express from 'express'
 import dotenv from 'dotenv'
 import chalk from 'chalk'
@@ -7,7 +9,7 @@ dotenv.load({
 	path: '.env'
 })
 const { NODE_ENV, PUBLIC_PATH, PORT } = process.env
-
+global.__DEV__ = NODE_ENV !== 'production'
 const app = express()
 
 app.set('env', NODE_ENV)
@@ -25,12 +27,14 @@ if (NODE_ENV === 'development') {
 		inline: true,
 		publicPath: PUBLIC_PATH + '/',
 		serverSideRender: true,
-		stats: 'errors-only'
+		stats: {
+			colors: true
+		}
 	})
 	app.use(middleware)
 	app.use(webpackHotMiddleware(compiler))
 } else {
-	const staticPath = path.resolve(__dirname, './public' + PUBLIC_PATH)
+	const staticPath = path.resolve(__dirname, './build' + PUBLIC_PATH)
 	console.log(PUBLIC_PATH, staticPath)
 	app.use(
 		PUBLIC_PATH,
@@ -40,7 +44,7 @@ if (NODE_ENV === 'development') {
 	)
 }
 
-const server = require('./server/app')
+const server = __DEV__ ? require('./server/app') : require('./build/app')
 app.use(server)
 
 app.listen(app.get('port'), () => {
